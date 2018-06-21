@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContactModel.h"
 
 @interface DetailInfoViewController : UIViewController
-@property (strong, nonatomic) NSString *name;
 
+@property (strong, nonatomic) ContactModel *contact;
 
 @end

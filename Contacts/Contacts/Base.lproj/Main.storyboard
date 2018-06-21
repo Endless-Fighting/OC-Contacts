@@ -250,7 +250,7 @@
         <!--Detail Info View Controller-->
         <scene sceneID="1ra-CH-vK4">
             <objects>
-                <viewController id="8nM-NH-a5F" customClass="DetailInfoViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailInfoView" id="8nM-NH-a5F" customClass="DetailInfoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oL4-hQ-PzX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -313,7 +313,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit" backgroundImage="roundedBt"/>
                                 <connections>
-                                    <segue destination="Gpp-JY-BoB" kind="show" identifier="editInfo" id="leK-AX-WBX"/>
+                                    <action selector="editTouched" destination="8nM-NH-a5F" eventType="touchUpInside" id="VQX-6G-WT8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hph-Nm-K1F">
@@ -350,7 +350,7 @@
         <!--Edit Info View Controller-->
         <scene sceneID="o1e-40-waL">
             <objects>
-                <viewController storyboardIdentifier="EditInfoViewController" id="Gpp-JY-BoB" customClass="EditInfoViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditInfoView" id="Gpp-JY-BoB" customClass="EditInfoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ur2-gF-daZ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -512,9 +512,6 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="8nM-NH-a5F" kind="show" identifier="showInfo" id="XJs-3N-82c"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>

@@ -8,12 +8,9 @@
 
 #import "SqliteManager.h"
 
-
-
 @interface SqliteManager ()
 
 @property(nonatomic)sqlite3 * contactData;
-@property(nonatomic,strong)NSMutableArray * mContacts;
 
 @end
 
@@ -34,32 +31,39 @@
 
 +(instancetype)getSqliteManager
 {
+    NSLog(@"get manager...");
     static SqliteManager * sqliteManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sqliteManager = [[SqliteManager alloc] init];
     });
+    NSLog(@"get manager success");
     return sqliteManager;
 }
 
 -(void)openSqlite_db
 {
+    NSLog(@"open db...");
     NSString * path1 = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     
     NSString * path = [path1 stringByAppendingPathComponent:@"contact.db"];
     
     sqlite3_open([path UTF8String],&self->_contactData);
+    NSLog(@"open db success");
 }
 
 -(void)creatSqlite_db
 {
+    NSLog(@"create db...");
     char * createTableSQL = "create table if not exists contact (id integer primary key,name varchar(30),phoneNo varchar(100),weChatNo varchar(100),emailAddress varchar(100))";
     
     sqlite3_exec(self->_contactData, createTableSQL, NULL, NULL, NULL);
+    NSLog(@"create db success");
 }
 
 -(void)loadContacts
 {
+    NSLog(@"load contacts...");
     [self.mContacts removeAllObjects];
     
     char * selectSQL = "select * from contact order by id";
@@ -80,11 +84,13 @@
     }
     
     sqlite3_finalize(stmt);
+    NSLog(@"load contacts success");
 }
 
 
 -(void)addContactToSqlite:(ContactModel *)contact;
 {
+    NSLog(@"insert contact...");
     [self.mContacts addObject:contact];
     char * insertSQL = "insert into contact values(NULL,?,?,?,?)";
     
@@ -111,6 +117,7 @@
 
 -(void)deleteContactFromSqlite:(NSInteger)index;
 {
+    NSLog(@"delete contact...");
     NSInteger ID = ((ContactModel *)self.mContacts[index - 1]).contactId;
     [self.mContacts removeObjectAtIndex:index - 1];
     
@@ -131,12 +138,14 @@
     }
     
     sqlite3_finalize(stmt);
+    NSLog(@"delete success");
 }
 
 
 -(void)updateContactFromSqlite:(ContactModel *)contact withIndex:(NSInteger)index;
 {
-    NSInteger ID = ((ContactModel *)self.contacts[index - 1]).contactId;
+    NSLog(@"update contact...");
+    NSInteger ID = ((ContactModel *)self.mContacts[index - 1]).contactId;
     
     [self.mContacts replaceObjectAtIndex:index - 1 withObject:contact];
     
@@ -166,6 +175,7 @@
 
 -(void)selectContactFromWithName:(NSString *)name;
 {
+    NSLog(@"select contact...");
     NSMutableArray * mutableContacts = [NSMutableArray array];
     
     for (ContactModel * contact in self.mContacts)
@@ -177,6 +187,7 @@
     }
     
     self.mContacts = mutableContacts;
+    NSLog(@"select success");
 }
 
 -(void)closeSqlite_db

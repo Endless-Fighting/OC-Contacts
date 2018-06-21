@@ -10,6 +10,4 @@
 
 @interface CallingViewController : UIViewController
 @property (strong, nonatomic) NSString *phoneNum;
-
-
 @end

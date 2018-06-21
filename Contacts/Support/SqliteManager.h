@@ -15,8 +15,7 @@
 
 @interface SqliteManager :NSObject
 
-
-@property(nonatomic,strong,readonly)NSArray * contacts;
+@property(nonatomic,strong)NSMutableArray * mContacts;
 
 -(void)addContactToSqlite:(ContactModel *)contact;
 

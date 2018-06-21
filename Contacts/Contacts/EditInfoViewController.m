@@ -8,13 +8,15 @@
 
 
 #import "EditInfoViewController.h"
-#import "UseSqlite.h"
 
 @interface EditInfoViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNoText;
 @property (weak, nonatomic) IBOutlet UITextField *weChatNoText;
 @property (weak, nonatomic) IBOutlet UITextField *emailAddressText;
+
+@property (nonatomic,strong) SqliteManager * sqliteManager;
+@property(nonatomic,strong)NSIndexPath * index;
 
 @end
 
@@ -23,22 +25,48 @@
 
 -(void) viewDidLoad
 {
-    [self.nameText setText:self.contact.name];
-    [self.phoneNoText setText:self.contact.phoneNo];
-    [self.weChatNoText setText:self.contact.weChatNo];
-    [self.emailAddressText setText:self.contact.emailAddress];
+    self.sqliteManager = [SqliteManager getSqliteManager];
+    
+    //update
+    if (self.contact)
+    {
+        self.navigationItem.title = @"Eidt";
+        self.nameText.text = self.contact.name;
+        self.phoneNoText.text = self.contact.phoneNo;
+        self.weChatNoText.text = self.contact.weChatNo;
+        self.emailAddressText.text = self.contact.emailAddress;
+    }
+    //add new
+    else
+    {
+        self.navigationItem.title = @"Add";
+    }
 }
 
 - (IBAction)saveTouched {
     NSLog(@"%@", self.nameText.text);
     
-    ContactModel *newConact = [[ContactModel alloc] init];
-    newConact.name = [NSString stringWithFormat:@"%@", self.nameText.text];
-    newConact.phoneNo = [NSString stringWithFormat:@"%@", self.phoneNoText.text];
-    newConact.weChatNo = [NSString stringWithFormat:@"%@", self.weChatNoText.text];
-    newConact.emailAddress = [NSString stringWithFormat:@"%@", self.emailAddressText.text];
-    [UseSqlite updateContact:newConact];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    ContactModel * contact = [[ContactModel alloc]
+                              initWithName:self.nameText.text
+                              PhoneNo:self.phoneNoText.text
+                              WeChatNo:self.weChatNoText.text
+                              EmailAddress:self.emailAddressText.text];
+    
+    self.contact.name = self.nameText.text;
+    self.contact.phoneNo = self.phoneNoText.text;
+    self.contact.weChatNo = self.weChatNoText.text;
+    self.contact.emailAddress = self.emailAddressText.text;
+    //update
+    if (self.contact)
+    {
+        [self.sqliteManager updateContactFromSqlite:contact withIndex:contact.contactId + 1];
+    }
+    //add new
+    else
+    {
+        [self.sqliteManager addContactToSqlite:contact];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

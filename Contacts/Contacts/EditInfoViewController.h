@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UseSqlite.h"
+#import "SqliteManager.h"
 
 @interface EditInfoViewController : UIViewController
-@property (strong, nonatomic) ContactModel *contact;
 
+@property (strong, nonatomic) ContactModel *contact;
 
 @end

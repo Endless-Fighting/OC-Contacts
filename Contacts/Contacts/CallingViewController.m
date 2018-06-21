@@ -22,6 +22,9 @@
 -(void) viewDidLoad
 {
     [self.phoneNumLabel setText: self.phoneNum];
+    [self.navigationController.navigationItem setHidesBackButton:YES];
+    [self.navigationItem setHidesBackButton:YES];
+    [self.navigationController.navigationBar.backItem setHidesBackButton:YES];
 }
 
 

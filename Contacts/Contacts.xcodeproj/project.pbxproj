@@ -43,7 +43,6 @@
 		C1F54F5220CD0D560021F337 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F54F5120CD0D560021F337 /* SearchViewController.m */; };
 		C1F54F5520CD15780021F337 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F54F5420CD15780021F337 /* ContactsViewController.m */; };
 		C1F54F5E20CD82EB0021F337 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C1F54F5D20CD82EB0021F337 /* libsqlite3.tbd */; };
-		C1F54F6120CD83220021F337 /* UseSqlite.m in Sources */ = {isa = PBXBuildFile; fileRef = C1F54F6020CD83220021F337 /* UseSqlite.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,8 +134,6 @@
 		C1F54F5320CD15660021F337 /* ContactsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		C1F54F5420CD15780021F337 /* ContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		C1F54F5D20CD82EB0021F337 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		C1F54F5F20CD83120021F337 /* UseSqlite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UseSqlite.h; sourceTree = "<group>"; };
-		C1F54F6020CD83220021F337 /* UseSqlite.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UseSqlite.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,8 +327,6 @@
 			children = (
 				C1F54F1420CBEFF00021F337 /* AppDelegate.h */,
 				C1F54F1520CBEFF00021F337 /* AppDelegate.m */,
-				C1F54F5F20CD83120021F337 /* UseSqlite.h */,
-				C1F54F6020CD83220021F337 /* UseSqlite.m */,
 				C1BB511320D21A0200BBBBD0 /* ContactModel.h */,
 				C1BB511420D21A1600BBBBD0 /* ContactModel.m */,
 				C10F415B20DB49110068CA46 /* SqliteManager.h */,
@@ -488,7 +483,6 @@
 				C10F415820D754B10068CA46 /* MJRefreshBackFooter.m in Sources */,
 				C10F415A20D754B10068CA46 /* MJRefreshComponent.m in Sources */,
 				C10F414720D754B10068CA46 /* UIScrollView+MJRefresh.m in Sources */,
-				C1F54F6120CD83220021F337 /* UseSqlite.m in Sources */,
 				C10F415120D754B10068CA46 /* MJRefreshAutoGifFooter.m in Sources */,
 				C1F54F1620CBEFF00021F337 /* AppDelegate.m in Sources */,
 				C1F54F5520CD15780021F337 /* ContactsViewController.m in Sources */,

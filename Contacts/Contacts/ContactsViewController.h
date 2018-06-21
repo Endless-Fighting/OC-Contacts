@@ -10,6 +10,4 @@
 
 @interface ContactsViewController : UITableViewController
 
-
-
 @end

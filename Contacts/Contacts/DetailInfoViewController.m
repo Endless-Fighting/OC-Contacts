@@ -7,7 +7,6 @@
 //
 
 #import "DetailInfoViewController.h"
-#import "UseSqlite.h"
 #import "EditInfoViewController.h"
 
 @interface DetailInfoViewController ()
@@ -15,40 +14,45 @@
 @property (weak, nonatomic) IBOutlet UILabel *phoneNoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *weChatNoLabel;
 @property (weak, nonatomic) IBOutlet UILabel *emailAddressLabel;
-@property (strong, nonatomic) ContactModel *contact;
 
 @end
 
 @implementation DetailInfoViewController
-@synthesize name = _name;
-
-
 
 -(void) viewDidLoad
 {
-    self.contact = [UseSqlite getInfo:self.name];
-    [self.nameLabel setText:self.name];
+    [self.nameLabel setText:self.contact.name];
     [self.phoneNoLabel setText:self.contact.phoneNo];
     [self.weChatNoLabel setText:self.contact.weChatNo];
     [self.emailAddressLabel setText:self.contact.emailAddress];
 }
 
 - (IBAction)deleteTouched {
-    [UseSqlite deleteContact:self.name];
+    [[SqliteManager getSqliteManager] deleteContactFromSqlite:self.contact.contactId];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)shareTouched {
-    NSArray *info = @[[NSString stringWithFormat:@"%@ - PhoneNo: %@ - WeChatNo: %@ - Email: %@", self.contact.name, self.contact.phoneNo, self.contact.weChatNo, self.contact.emailAddress]];
+    NSArray *info = @[[NSString stringWithFormat:@"%@ \n - PhoneNo: %@ \n- WeChatNo: %@ \n- Email: %@", self.contact.name, self.contact.phoneNo, self.contact.weChatNo, self.contact.emailAddress]];
     UIActivityViewController *activityController=[[UIActivityViewController alloc]initWithActivityItems:info applicationActivities:nil];
     [self.navigationController presentViewController:activityController animated:YES completion:nil];
 }
 
--(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if([[segue identifier] isEqualToString:@"editInfo"]){
-        ((EditInfoViewController *)segue.destinationViewController).contact = self.contact;
-    }
+- (IBAction)editTouched {
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    EditInfoViewController * editInfoView = [storyboard instantiateViewControllerWithIdentifier:@"EditInfoView"];
+    editInfoView.contact = self.contact;
+    
+    [self.navigationController pushViewController:editInfoView animated:YES];
 }
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.nameLabel setText:self.contact.name];
+    [self.phoneNoLabel setText:self.contact.phoneNo];
+    [self.weChatNoLabel setText:self.contact.weChatNo];
+    [self.emailAddressLabel setText:self.contact.emailAddress];
+}
+
 
 @end
