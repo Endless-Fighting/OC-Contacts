@@ -44,7 +44,8 @@
 }
 
 - (IBAction)saveTouched {
-    NSLog(@"%@", self.nameText.text);
+    if(![self checkInfo])
+        return;
     
     ContactModel * contact = [[ContactModel alloc]
                               initWithName:self.nameText.text
@@ -67,6 +68,25 @@
         [self.sqliteManager addContactToSqlite:contact];
     }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(BOOL) checkInfo
+{
+    NSString* message;
+    if(self.nameText.text.length == 0)
+        message = @"name cannot be empty";
+    else if(self.phoneNoText.text.length == 0)
+        message = @"phoneNo cannot be empty";
+    else
+        return YES;
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){}];
+    
+    [alert addAction:okAction];
+    [self presentViewController:alert animated:YES completion:nil];
+    return NO;
 }
 
 @end

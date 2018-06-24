@@ -8,6 +8,7 @@
 
 #import "DetailInfoViewController.h"
 #import "EditInfoViewController.h"
+#import "CallingViewController.h"
 
 @interface DetailInfoViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -45,6 +46,15 @@
     
     [self.navigationController pushViewController:editInfoView animated:YES];
 }
+
+- (IBAction)callTouched {
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    CallingViewController * editInfoView = [storyboard instantiateViewControllerWithIdentifier:@"CallingView"];
+    editInfoView.phoneNum = self.contact.name;
+    
+    [self.navigationController pushViewController:editInfoView animated:YES];
+}
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
